@@ -8,6 +8,8 @@ data Tree = T Int [Level]
 
 data Deko = Empty | Lametta | Ball deriving (Show,Eq)
 
+step = 3
+
 instance Arbitrary Tree where
   arbitrary =
     do
@@ -38,7 +40,7 @@ createTree height lametta_ratio ball_ratio =
         do
           current_level <- infiniteListOf $ randomDeko lametta_ratio ball_ratio (100 - lametta_ratio - ball_ratio)
           next_levels <- createTree' height (level + 1) lametta_ratio ball_ratio
-          return $ take (level * 2) current_level:next_levels
+          return $ take (level * 2 - (2 * level `div` step)) current_level:next_levels
   in
     do
       levels <- createTree' height 0 lametta_ratio ball_ratio
@@ -53,7 +55,7 @@ showTree indent (T height levels) =
     showDeko Lametta = '|'
     showDeko Empty = ' '
     showLevel :: Int -> Int -> [Deko] -> String
-    showLevel height level dekos = replicate (indent + height - level) ' ' ++ '/':map showDeko dekos ++ "\\"
+    showLevel height level dekos = replicate (indent + height - level + (level `div` step)) ' ' ++ '/':map showDeko dekos ++ "\\"
   in
     unlines $ zipWith (showLevel height) [0..height] levels
 
