@@ -13,9 +13,9 @@ step = 3
 instance Arbitrary Tree where
   arbitrary =
     do
-      height <- choose (1,10)
-      lametta_ratio <- choose (0,30)
-      ball_ratio <- choose (0,30)
+      height <- choose (10,20)
+      lametta_ratio <- choose (10,50)
+      ball_ratio <- choose (20,30)
       createTree height lametta_ratio ball_ratio
 
 randomDeko :: Int -> Int -> Int -> Gen Deko
