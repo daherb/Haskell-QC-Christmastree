@@ -6,4 +6,4 @@ import Control.Monad
 import Data.Functor
 
 main :: IO ()
-main = join $ (putStrLn . showTree 10) <$> generate (arbitrary :: Gen Tree)
+main = join $ (putStrLn . show) <$> generate (arbitrary :: Gen Tree)

@@ -8,12 +8,14 @@ data Tree = T Int [Level]
 
 data Deko = Empty | Lametta | Ball deriving (Show,Eq)
 
+screenWidth = 80
+screenHeight = 24
 step = 3
 
 instance Arbitrary Tree where
   arbitrary =
     do
-      height <- choose (10,20)
+      height <- choose (10,screenHeight - 1)
       lametta_ratio <- choose (10,50)
       ball_ratio <- choose (20,30)
       createTree height lametta_ratio ball_ratio
@@ -60,4 +62,4 @@ showTree indent (T height levels) =
     unlines $ (zipWith (showLevel height) [0..height] levels) ++ [replicate (height + indent) ' ' ++ "||"]
 
 instance Show Tree where
-  show = showTree 0
+  show t@(T height _) = showTree (screenWidth `div` 2 - height `div` 2 + height `div` step) t
