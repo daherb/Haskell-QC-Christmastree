@@ -57,7 +57,7 @@ showTree indent (T height levels) =
     showLevel :: Int -> Int -> [Deko] -> String
     showLevel height level dekos = replicate (indent + height - level + (level `div` step)) ' ' ++ '/':map showDeko dekos ++ "\\"
   in
-    unlines $ (zipWith (showLevel height) [0..height] levels) ++ [replicate height ' ' ++ "||"]
+    unlines $ (zipWith (showLevel height) [0..height] levels) ++ [replicate (height + indent) ' ' ++ "||"]
 
 instance Show Tree where
   show = showTree 0
