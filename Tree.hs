@@ -62,4 +62,4 @@ showTree indent (T height levels) =
     unlines $ (zipWith (showLevel height) [0..height] levels) ++ [replicate (height + indent) ' ' ++ "||"]
 
 instance Show Tree where
-  show t@(T height _) = showTree (screenWidth `div` 2 - height `div` 2 + height `div` step) t
+  show t@(T height _) = showTree (screenWidth `div` 2 - height `div` 2 - height `div` step) t
