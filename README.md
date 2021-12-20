@@ -11,3 +11,4 @@
             /o  |    o     \
            /   o  o  ooo    \
            
+Copyright (c) 2015 Herbert Lange
